@@ -1,0 +1,44 @@
+/* profile-header.component.css */
+.navbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #333; /* Adjust as needed */
+    color: white;
+    padding: 10px 20px;
+  }
+  
+  .navbar-left {
+    display: flex;
+    align-items: center;
+  }
+  
+  .navbar-left ul {
+    list-style: none;
+    display: flex;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .navbar-left li {
+    margin-right: 20px;
+  }
+  
+  .navbar-left a {
+    text-decoration: none;
+    color: white;
+  }
+  
+//   .navbar-right {
+//     /* You can adjust alignment and spacing here */
+//   }
+  aside{
+    display: block;
+    flex-basis: 0;
+    flex-shrink: 1;
+    padding: 0.75rem;
+}
+aside{
+    flex: 1;
+}
+  

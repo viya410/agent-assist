@@ -11,36 +11,81 @@
         <form class="row g-3" #formRef="ngForm" (ngSubmit)="submitForm(formRef)">
             <div class="col-md-6">
               <label for="firstname" class="form-label">First Name</label>
-              <input type="text" name="firstname" class="form-control" id="firstname" ngModel>
+              <div style="display: flex;">
+              <input type="text" name="firstname" class="form-control" id="firstname" ngModel required>
+            </div>
+            <div *ngIf="formRef.submitted && formRef.controls['firstname'].hasError('required')" class="text-danger">
+              This field is mandatory.
+            </div>
             </div>
             <div class="col-md-6">
               <label for="lastname" class="form-label">Last Name</label>
-              <input type="text" class="form-control" id="lastname" name="lastname" ngModel>
+              <div style="display: flex;">
+              <input type="text" class="form-control" id="lastname" name="lastname" ngModel required>
+            </div>
+            <div *ngIf="formRef.submitted && formRef.controls['lastname'].hasError('required')" class="text-danger">
+              This field is mandatory.
+            </div>
             </div>
             <div class="col-12">
               <label for="username" class="form-label">Username</label>
-              <input type="text" class="form-control" id="username" placeholder="janedoe123" name="username" ngModel>
+              <div style="display: flex;">
+              <input type="text" class="form-control" id="username" placeholder="janedoe123" name="username" ngModel required>
             </div>
-                  <div class="col-md-12">
+          </div>
+            <div *ngIf="formRef.submitted && formRef.controls['username'].hasError('required')" class="text-danger">
+              This field is mandatory.
+            </div>
+                  <div class="col-md-6">
               <label for="password" class="form-label">Password</label>
-              <input type="password" class="form-control" id="password" name="password" ngModel>
+              <div style="display: flex;">
+              <input type="password" class="form-control" id="password" name="password" ngModel required>
+              </div>
+            <div *ngIf="formRef.submitted && formRef.controls['password'].hasError('required')" class="text-danger">
+              Please set a password.
             </div>
+          </div>
+            <div class="col-md-6">
+              <label for="password" class="form-label">Re-enter Password</label>
+              <div style="display: flex;">
+              <input type="password" class="form-control" id="rpassword" name="rpassword" ngModel required>
+            </div>
+            <div *ngIf="formRef.submitted && formRef.controls['rpassword'].hasError('required')" class="text-danger">
+              Please set a password.
+            </div>
+            <div *ngIf="formRef.value.rpassword!== formRef.value.password && formRef.value.rpassword!== ''" class="text-danger">
+              Passwords do not match
+            </div>
+          </div>
             <div class="col-12">
                 <label for="email" class="form-label">Email ID</label>
-                <input type="email" class="form-control" id="email" name="email" ngModel placeholder="janedoe@email.com">
+                <div style="display: flex;">
+                <input type="email" class="form-control" id="email" name="email" ngModel required placeholder="janedoe@email.com">
+              </div>
+            </div>
+              <div *ngIf="formRef.submitted && formRef.controls['email'].hasError('required')" class="text-danger">
+                This field is mandatory.
               </div>
               <div class="col-12">
                 <label for="phone" class="form-label">Contact number</label>
-                <input type="tel" name="phone" ngModel class="form-control" id="phone">
-              </div>
-            <div class="col-12">
-              <div class="form-check">
-                <input class="form-check-input" type="checkbox" id="gridCheck">
-                <label class="form-check-label" for="gridCheck">
-                  Check me out
-                </label>
+                <div style="display: flex;">
+                <input type="tel" name="phone" ngModel required class="form-control" id="phone">
               </div>
             </div>
+              <div *ngIf="formRef.submitted && formRef.controls['phone'].hasError('required')" class="text-danger">
+                This field is mandatory.
+              </div>
+            <div class="col-12">
+          <div class="form-check">
+            <label class="form-check-label" for="gridCheck">
+              Check me out
+            </label>
+            <input class="form-check-input" type="checkbox" id="gridCheck" name="gridCheck" ngModel required>
+          </div>
+          <div *ngIf="formRef.submitted && formRef.controls['gridCheck'].hasError('required')" class="text-danger">
+            Please check the box.
+          </div>
+        </div>
             <div class="col-12 text-center m-2">
               <button type="submit" class="btn btn-primary" >Submit</button>
             </div>

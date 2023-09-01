@@ -12,7 +12,11 @@ const routes: Routes = [
   {
   path:'justlogin',component:JustloginComponent
 },
-  { path: 'profiles', loadChildren: () => import('./profiles/profiles.module').then(m => m.ProfilesModule) }
+  { path: 'profiles', loadChildren: () => import('./profiles/profiles.module').then(m => m.ProfilesModule) 
+},
+{
+  path: 'chat', loadChildren: ()=>import ('./profiles/profiles.module').then(m=>m.ProfilesModule)
+}
 ];
 
 @NgModule({

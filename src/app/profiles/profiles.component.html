@@ -1,23 +1,32 @@
-<header class="navbar">
-    <nav class="navbar-left">
-      <!-- Left side of the navbar content -->
-      <ul>
-        <li><a routerLink="/profiles/chat">Chat</a></li>
-        <li><a routerLink="/profiles/user">User</a></li>
-        <li><a routerLink="/profiles/admin">Admin</a></li>
-        <!-- Add more links as needed -->
-      </ul>
-    </nav>
-    <div class="navbar-right">
-      <!-- Right side of the navbar content -->
-      <!-- You can add user-related controls, settings, etc. here -->
+<header>
+  <div>
+    <h1>Agent Assist Portal</h1>
+  </div>
+  <div class="dropdown">
+    <button (click)="toggleDropdown()">Welcome, username</button>
+  <div *ngIf="isClicked" class="dropdown-content">
+    <p>Username</p>
+    <a id="logout" href="./justlogin">Logout</a>
+  </div>
+  </div>
+</header>
+
+<div class="container">
+  <div class="navbar">
+    <ul>
+      <div class="div1">
+      <li>
+        <a href="#">All Agents</a>
+      </li>
+      </div>
+      <div class="div2">
+      <li>
+        <a href="./profiles/chat">Chat</a>
+      </li>
     </div>
-  </header>
-  <aside>
-    <div class="logo-container">
-        <p>hello
-        </p>
-        <p>hi</p>
-        <p>Welcome</p>
-    </div>
-</aside>
+    </ul>
+  </div>
+  <div class="content">
+    <router-outlet></router-outlet>
+  </div>
+</div>

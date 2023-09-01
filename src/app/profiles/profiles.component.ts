@@ -6,5 +6,9 @@ import { Component } from '@angular/core';
   styleUrls: ['./profiles.component.scss']
 })
 export class ProfilesComponent {
-
+  isClicked = false;
+  toggleDropdown(){
+    console.log('hello')
+    this.isClicked=!this.isClicked ;
+  }
 }

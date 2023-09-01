@@ -8,14 +8,14 @@
     </div>
   </nav>
 <section class="container my-3 w-50 p-3 border-box">
-    <form class="row g-3">
+    <form class="row g-3" #formRef="ngForm" (ngSubmit)="submitForm(formRef)">
         <div class="col-12">
-          <label for="Username" class="form-label">Username</label>
-          <input type="text" class="form-control" id="Username" placeholder="janedoe123">
+          <label for="username" class="form-label">Username</label>
+          <input type="text" class="form-control" id="username" placeholder="janedoe123" name="username" ngModel>
         </div>
               <div class="col-md-12">
-          <label for="Password" class="form-label">Password</label>
-          <input type="password" class="form-control" id="Password">
+          <label for="password" class="form-label">Password</label>
+          <input type="password" class="form-control" id="password" name="password" ngModel>
               </div>
         <div class="col-12">
           <div class="form-check">

@@ -8,30 +8,30 @@
     </div>
   </nav>
     <section class="container my-3 w-50 p-3 border-box">
-        <form class="row g-3">
+        <form class="row g-3" #formRef="ngForm" (ngSubmit)="submitForm(formRef)">
             <div class="col-md-6">
-              <label for="fname" class="form-label">First Name</label>
-              <input type="text" class="form-control" id="fname">
+              <label for="firstname" class="form-label">First Name</label>
+              <input type="text" name="firstname" class="form-control" id="firstname" ngModel>
             </div>
             <div class="col-md-6">
-              <label for="lname" class="form-label">Last Name</label>
-              <input type="text" class="form-control" id="lname">
+              <label for="lastname" class="form-label">Last Name</label>
+              <input type="text" class="form-control" id="lastname" name="lastname" ngModel>
             </div>
             <div class="col-12">
-              <label for="Username" class="form-label">Username</label>
-              <input type="text" class="form-control" id="Username" placeholder="janedoe123">
+              <label for="username" class="form-label">Username</label>
+              <input type="text" class="form-control" id="username" placeholder="janedoe123" name="username" ngModel>
             </div>
                   <div class="col-md-12">
-              <label for="Password" class="form-label">Password</label>
-              <input type="password" class="form-control" id="Password">
+              <label for="password" class="form-label">Password</label>
+              <input type="password" class="form-control" id="password" name="password" ngModel>
             </div>
             <div class="col-12">
                 <label for="email" class="form-label">Email ID</label>
-                <input type="email" class="form-control" id="email" placeholder="janedoe@email.com">
+                <input type="email" class="form-control" id="email" name="email" ngModel placeholder="janedoe@email.com">
               </div>
               <div class="col-12">
-                <label for="phoneno" class="form-label">Contact number</label>
-                <input type="tel" class="form-control" id="phoneno">
+                <label for="phone" class="form-label">Contact number</label>
+                <input type="tel" name="phone" ngModel class="form-control" id="phone">
               </div>
             <div class="col-12">
               <div class="form-check">
@@ -42,7 +42,7 @@
               </div>
             </div>
             <div class="col-12 text-center m-2">
-              <button type="submit" class="btn btn-primary" (click)="redirect();">Submit</button>
+              <button type="submit" class="btn btn-primary" >Submit</button>
             </div>
             <div class="col-12 text-center m-2">
                 <a href="/justlogin" class="col-6 text-end m-2" >Already a user? Login!</a>

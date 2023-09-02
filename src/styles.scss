@@ -1,1 +1,14 @@
-/* You can add global styles to this file, and also import other style files */
+.userResponse {
+    text-align: right;
+    margin: 10px;
+    padding: 5px 10px;
+    border-radius: 10px;
+    font-family: consolas, 'courier new', menlo, source-code-pro, monaco, monospace;
+  }
+  
+  .botResponse {
+    text-align: left;
+    margin: 10px;
+    padding: 5px 10px;
+    font-family: consolas, 'courier new', menlo, source-code-pro, monaco, monospace;
+  }

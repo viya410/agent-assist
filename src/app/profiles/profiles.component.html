@@ -3,11 +3,13 @@
     <h1>Agent Assist Portal</h1>
   </div>
   <div class="dropdown">
-    <button (click)="toggleDropdown()">Welcome, username</button>
+    <ng-container *ngIf="authenticationService.isLoggedIn()">
+      <button (click)="toggleDropdown()">@{{authenticationService.getUsername()}} ({{authenticationService.getUserrole()}})</button>
   <div *ngIf="isClicked" class="dropdown-content">
     <p>Username</p>
     <a id="logout" href="./justlogin">Logout</a>
   </div>
+    </ng-container>
   </div>
 </header>
 

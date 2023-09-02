@@ -7,6 +7,8 @@ import { Router } from '@angular/router';
 export class AuthenticationService {
   private isAuthenticated: boolean = false;
   private usersData: any;
+  private username: string = '';
+  private userRole: string = '';
 
   constructor(private router: Router) {
     this.usersData = this.getUsersData() || {
@@ -43,6 +45,7 @@ export class AuthenticationService {
   login(username: string, password: string): void {
     const data = this.getUsersData();
     console.log(data)
+    this.username = username;
 
     if (data) {
       const isAdmin = !!data['admin'].find((user: any) =>
@@ -57,6 +60,7 @@ export class AuthenticationService {
           && user.password.toLowerCase() === password.toLowerCase());
         if (matchedUser) {
           this.isAuthenticated = true;
+          this.userRole= userCategory;
           if(isAdmin){
             this.router.navigate(['/profiles/admin']);
           }
@@ -82,6 +86,14 @@ export class AuthenticationService {
       alert("not exist");
     }
   }
+
+  getUsername(): string{
+    return this.username;
+  }
+
+getUserrole(): string{
+  return this.userRole;
+}
 
   isLoggedIn(): boolean {
     return this.isAuthenticated;

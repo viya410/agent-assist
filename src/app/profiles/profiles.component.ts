@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { AuthenticationService } from '../authentication.service';
 
 @Component({
   selector: 'app-profiles',
@@ -10,5 +11,8 @@ export class ProfilesComponent {
   toggleDropdown(){
     console.log('hello')
     this.isClicked=!this.isClicked ;
+  }
+  constructor(public authenticationService: AuthenticationService){
+      
   }
 }

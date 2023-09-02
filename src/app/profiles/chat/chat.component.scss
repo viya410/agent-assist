@@ -1,0 +1,136 @@
+*{
+    box-sizing: border-box;
+}
+
+.msgs{
+    display: flex;
+    flex-direction: column;
+    overflow-y: scroll;
+    height: 100%;
+    width: 100%;
+    background-color: white;
+    padding: 15px;
+    margin-bottom: 15px;
+    border-radius: 10px;
+}
+
+.chat{
+    font-family: 'roboto', 'oxygen', 'ubuntu', 'cantarell', 'fira sans', 'droid sans', 'heletica neue', Arial, Helvetica, sans-serif ;
+    height: 100%;
+    margin: 0px;
+    display: flex;
+}
+
+span{
+    padding-right: 15px;
+    padding-left: 15px;
+}
+
+.chat{
+    height: 500px;
+    width: 50vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: 2px solid black;
+    padding: 10px;
+    margin: 10px;
+    border-radius: 5px;
+}
+
+.input{
+    width: 100%;
+    display: flex;
+    align-items: center;
+}
+
+input{
+    border: 0;
+    padding: 15px;
+    margin-left: auto;
+    border-radius: 10px;
+    width: 85%;
+    margin-bottom: 15px;
+}
+
+button{
+    display: flex;
+    background-color: rgb(138, 247, 147);
+    border-radius: 10px ;
+    border-color: white;
+    margin-bottom: 15px;
+    margin-left: 10px;
+    margin-right: auto;
+    padding: 13px;
+    padding-left: 20px;
+    padding-right: 20px;
+    align-self: center;
+    justify-content: center;
+}
+
+.replies,
+.defaultAnswer,
+.library{
+    margin: 20px;
+    padding: 20px;
+    justify-content: space-around;
+}
+
+.flex-container{
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.response,
+.bot-response{
+    display: flex;
+    align-items: center;
+    margin: 1%;
+}
+
+input{
+    border: 1px solid black;
+}
+
+@media only screen and (max-width: 980px){
+    .chat{
+        width: 75vw;
+        margin: 10vw;
+        margin-top: 3vw;
+        margin-bottom: 3vw;
+    }
+
+    .input{
+        text-align: center;
+        align-items: center;
+        display: flex;
+    }
+
+    .flex-container{
+        flex-direction: column;
+        align-items: center;
+    }
+}
+
+#user{
+    display: flex;
+    margin-left: auto;
+    text-align: right;
+    margin: 10px;
+    padding: 5px 10px;
+    border-radius: 10px;
+}
+
+#bot{
+    margin-right: auto;
+}
+
+.bot, .bot-response{
+    font-family: consolas, 'courier new', menlo, source-code-pro, monaco, monospace;
+}
+
+.flex-container{
+    display: flex;
+    justify-content: space-around;
+}

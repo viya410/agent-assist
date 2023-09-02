@@ -6,6 +6,7 @@ import { ProfilesComponent } from './profiles.component';
 import { UserComponent } from './user/user.component';
 import { AdminComponent } from './admin/admin.component';
 import { ChatComponent } from './chat/chat.component';
+import { FormsModule } from '@angular/forms';
 
 
 
@@ -18,7 +19,8 @@ import { ChatComponent } from './chat/chat.component';
   ],
   imports: [
     CommonModule,
-    ProfilesRoutingModule
+    ProfilesRoutingModule,
+    FormsModule
   ]
 })
 export class ProfilesModule { }

@@ -1,1 +1,19 @@
-<p>chat works!</p>
+<div id="rightdiv">
+    <div id="heading">
+        <h1>{{authenticationService.getUsername()}}!</h1>
+    </div>
+    <div class="flex-container">
+        <div id="chat" class="chat">
+            <div id="msgs" class="msgs" #parentElement>
+                <div class="bot-response"><span>Hi, how can I help you?</span></div>
+            </div>
+            <!--autofocus means when the page loads, the focus should immediately go to the text box i created-->
+            <div class="input">
+                <input id="inputText" type="text"  (keydown.enter)="sendMessage()" [(ngModel)]="inputText" 
+                placeholder="Ask me something..." autocomplete="off"
+                 autofocus="true" class="inputbox"/>
+                <button type="button" (click)="sendMessage()">Enter</button>
+            </div>
+        </div>
+    </div>
+</div>

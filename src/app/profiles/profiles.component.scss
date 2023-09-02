@@ -68,6 +68,7 @@ button{
   padding: 12px 16px;
   text-decoration: none;
   display: block;
+  text-align: center;
 }
 
 .dropdown-content a:hover{
@@ -76,6 +77,12 @@ button{
 
 .dropdown:hover .dropdown-content{
   display: block;
+}
+
+#logout{
+  color: white;
+  margin: 10px;
+  padding: 10px;
 }
 
 h1{
@@ -112,3 +119,5 @@ a{
 .div1{
   background-color: rgb(249, 235, 212);
 }
+
+

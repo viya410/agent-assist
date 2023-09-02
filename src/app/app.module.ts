@@ -6,6 +6,8 @@ import { LoginsignupComponent } from './loginsignup/loginsignup.component';
 import { JustloginComponent } from './justlogin/justlogin.component';
 import { HomepageComponent } from './homepage/homepage.component';
 import { FormsModule } from '@angular/forms';
+import { AuthenticationService } from './authentication.service';
+import { ChatService } from './chat.service';
 
 @NgModule({
   declarations: [
@@ -19,7 +21,7 @@ import { FormsModule } from '@angular/forms';
     AppRoutingModule,
     FormsModule
   ],
-  providers: [],
+  providers: [AuthenticationService, ChatService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

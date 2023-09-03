@@ -12,7 +12,9 @@ export class ProfilesComponent {
     console.log('hello')
     this.isClicked=!this.isClicked ;
   }
-  constructor(public authenticationService: AuthenticationService){
-      
+  constructor(public authenticationService: AuthenticationService){    
+  }
+  isAdmin():boolean{
+    return false;
   }
 }

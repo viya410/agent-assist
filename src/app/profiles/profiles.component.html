@@ -1,14 +1,17 @@
 <header>
   <div>
-    <h1>Agent Assist Portal</h1>
+    <a href="">
+      <h2>AGENT ASSIST PORTAL DEMO</h2>
+    </a>
   </div>
   <div class="dropdown">
     <ng-container *ngIf="authenticationService.isLoggedIn()">
-      <button (click)="toggleDropdown()">@{{authenticationService.getUsername()}} ({{authenticationService.getUserrole()}})</button>
-  <div *ngIf="isClicked" class="dropdown-content">
-    <p>Username</p>
-    <a id="logout" href="./justlogin">Logout</a>
-  </div>
+      <button (click)="toggleDropdown()">@{{authenticationService.getUsername()}}
+        ({{authenticationService.getUserrole()}})</button>
+      <div *ngIf="isClicked" class="dropdown-content">
+        <p>Username</p>
+        <a id="logout" href="./justlogin">Logout</a>
+      </div>
     </ng-container>
   </div>
 </header>
@@ -17,15 +20,18 @@
   <div class="navbar">
     <ul>
       <div class="div1">
-      <li>
-        <a href="#">All Agents</a>
-      </li>
+        <li *ngIf="isAdmin(); else user">
+          <a routerLink="/profiles/admin">All Agents</a>
+        </li>
+        <ng-template #user>
+          <a routerLink="/profiles/admin">Agent Profile</a>
+      </ng-template>
       </div>
       <div class="div2">
-      <li>
-        <a href="./profiles/chat">Chat</a>
-      </li>
-    </div>
+        <li>
+          <a href="/profiles/chat">Chat</a>
+        </li>
+      </div>
     </ul>
   </div>
   <div class="content">

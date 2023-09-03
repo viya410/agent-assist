@@ -1,1 +1,81 @@
-<p>admin works!</p>
+<!-- "Add Agent" button -->
+<div class="text-end mb-3">
+  <button class="btn btn-primary" (click)="addAgent()" data-bs-toggle="modal" data-bs-target="#agentModal">Add Agent</button>
+  </div>
+<table class="table">
+    <thead>
+      <tr>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>Email</th>
+        <th>Phone</th>
+        <th>Username</th>
+        <th>Password</th>
+        <th>Actions</th>
+
+      </tr>
+    </thead>
+  <!-- Table body with ngFor loop -->
+  <tbody>
+    <tr *ngFor="let agent of agents; let i = index">
+      <td>{{ i + 1 }}</td> <!-- Display index, adding 1 to make it 1-based -->
+      <td>{{ agent.firstName }}</td>
+      <td>{{ agent.lastName }}</td>
+      <td>{{ agent.email }}</td>
+      <td>{{ agent.phone }}</td>
+      <td>{{ agent.username }}</td>
+      <td>{{ agent.password }}</td>
+      <td>
+        <button (click)="editAgent(agent)" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#agentModal">Edit</button>
+        <button class="btn btn-danger" (click)="deleteAgent(i)">Delete</button> <!-- Pass index to the deleteAgent function -->
+      </td>
+    </tr>
+    
+  </tbody>
+</table>
+
+
+
+<!-- Add/Edit Agent Modal -->
+<div class="modal fade" id="agentModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">{{ isAdding ? 'Add Agent' : 'Edit Agent' }}</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" (click)="cancel()"></button>
+      </div>
+      <div class="modal-body">
+        <form (ngSubmit)="saveAgent()">
+          <div class="mb-3">
+            <label for="firstName" class="form-label">First Name:</label>
+            <input type="text" id="firstName" name="firstName" class="form-control" [(ngModel)]="selectedAgent.firstName" required>
+          </div>
+          <div class="mb-3">
+            <label for="lastName" class="form-label">Last Name:</label>
+            <input type="text" id="lastName" name="lastName" class="form-control" [(ngModel)]="selectedAgent.lastName" required>
+          </div>
+          <div class="mb-3">
+            <label for="email" class="form-label">Email:</label>
+            <input type="email" id="email" name="email" class="form-control" [(ngModel)]="selectedAgent.email" required>
+          </div>
+          <div class="mb-3">
+            <label for="phone" class="form-label">Phone:</label>
+            <input type="tel" id="phone" name="phone" class="form-control" [(ngModel)]="selectedAgent.phone" required>
+          </div>
+          <div class="mb-3">
+            <label for="username" class="form-label">Username:</label>
+            <input type="text" id="username" name="username" class="form-control" [(ngModel)]="selectedAgent.username" required>
+          </div>
+          <div class="mb-3">
+            <label for="password" class="form-label">Password:</label>
+            <input type="password" id="password" name="password" class="form-control" [(ngModel)]="selectedAgent.password" required>
+          </div>
+          <div class="text-end">
+            <button type="submit" class="btn btn-primary">Save</button>
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" (click)="cancel()">Cancel</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

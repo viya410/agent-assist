@@ -1,41 +1,47 @@
 <nav class="navbar bg-body-tertiary" style="background-color: burlywood; padding: 20px;">
-    <div class="container-fluid navbar-container">
-        <a id="heading" href=""><h2>AGENT ASSIST PORTAL DEMO</h2></a>
-      <div class="links">
-      <a href="/justlogin">LOGIN</a>
-      <a href="/signup">SIGN UP</a>
-    </div>
-    </div>
-  </nav>
-  <div class="container mt-5">
-    <div class="jumbotron">
-      <h1>Welcome to Agent Assist Portal</h1>
-      <p class="lead">Transforming the way you communicate you know your customers.</p>
-    </div>
-  
-    <div class="row">
-      <div class="col-md-6">
-        <h2>About Agent Assist Portal</h2>
-        <p>At Agent Assist, our mission is to make it easy for the agent to view, access and understand customer needs and deliver consistent solutions. Our platform is designed to get all agents together.</p>
-      </div>
-      <div class="col-md-6">
-        <h2>Why Agent Assist Portal?</h2>
-        <ul>
-          <li>[Feature 1]: [Brief description of the feature and its benefits]</li>
-          <li>[Feature 2]: [Brief description of the feature and its benefits]</li>
-          <li>[Feature 3]: [Brief description of the feature and its benefits]</li>
-        </ul>
-      </div>
-    </div>
-  
-    <div class="text-center mt-4">
-      <a href="/justlogin" class="btn btn-primary btn-lg">Get Started</a>
-    </div>
-  
-    <div class="mt-5">
-      <blockquote class="blockquote">
-        <p class="mb-0">"[Quote from a satisfied user about their experience with the app.]"</p>
-        <footer class="blockquote-footer">- User's Name, User's Title/Role</footer>
-      </blockquote>
+  <div class="container-fluid navbar-container">
+    <a id="heading" href="">
+      <h2>AGENT ASSIST PORTAL DEMO</h2>
+    </a>
+    <div class="links">
+      <ng-container *ngIf="!(this.auth.isLoggedIn())">
+        <a href="/justlogin">LOGIN</a>
+        <a href="/signup">SIGN UP</a>
+      </ng-container>
+     
     </div>
   </div>
+</nav>
+<div class="container mt-5">
+  <div class="jumbotron">
+    <h1>Welcome to Agent Assist Portal</h1>
+    <p class="lead">Transforming the way you communicate you know your customers.</p>
+  </div>
+
+  <div class="row">
+    <div class="col-md-6">
+      <h2>About Agent Assist Portal</h2>
+      <p>At Agent Assist, our mission is to make it easy for the agent to view, access and understand customer needs and
+        deliver consistent solutions. Our platform is designed to get all agents together.</p>
+    </div>
+    <div class="col-md-6">
+      <h2>Why Agent Assist Portal?</h2>
+      <ul>
+        <li>[Feature 1]: [Brief description of the feature and its benefits]</li>
+        <li>[Feature 2]: [Brief description of the feature and its benefits]</li>
+        <li>[Feature 3]: [Brief description of the feature and its benefits]</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="text-center mt-4">
+    <a href="/justlogin" class="btn btn-primary btn-lg">Get Started</a>
+  </div>
+
+  <div class="mt-5">
+    <blockquote class="blockquote">
+      <p class="mb-0">"[Quote from a satisfied user about their experience with the app.]"</p>
+      <footer class="blockquote-footer">- User's Name, User's Title/Role</footer>
+    </blockquote>
+  </div>
+</div>

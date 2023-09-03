@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
+import { Agent } from './profiles/admin/agent.model';
 @Injectable({
   providedIn: 'root'
 })
@@ -9,7 +10,8 @@ export class AuthenticationService {
   private usersData: any;
   private username: string = '';
   private userRole: string = '';
-
+  
+ 
   constructor(private router: Router) {
     this.usersData = this.getUsersData() || {
       "admin": [{ email: "example@gmail.com", phone: 1234567890, firstName: 'Jitendra', lastName: 'Thakur', username: 'jitendra789', password: 'jitendra789' },
@@ -21,10 +23,42 @@ export class AuthenticationService {
         { email: "example@gmail.com", phone: 1234567890, firstName: 'Vishnu', lastName: 'Priya', username: 'vishnu456', password: 'vishnu456' },
       ]
     };
-    }
+    this.storeUsersData();
+  }
 
-    private storeUsersData(): void {
-    localStorage.setItem('user', JSON.stringify(this.usersData));
+  getAllAgents():any{
+     const value = this.getUsersData(); 
+    return (value['agent'])
+  }
+  addAgent(agent: any): void {
+    const storedData = this.getUsersData();
+  
+    // Check if an agent with the same email already exists
+    const isAgentExist = storedData['agent'].some((val: { email: any; }) => val.email === agent.email);
+  
+    if (!isAgentExist) {
+      // If the agent doesn't exist, add it to the array
+      storedData['agent'].push(agent);
+      this.storeUsersData(storedData);
+    } else {
+      // If the agent already exists, show an alert or handle the error accordingly
+      alert("User Already Exists!!");
+    }
+  
+  }
+  
+
+updateAgent(agent:any):void{
+    let value = this.getUsersData();
+    const indexToUpdate = value['agent'].findIndex((val: { email: any; }) => val.email === agent.email);
+    if (indexToUpdate !== -1) {
+      value['agent'][indexToUpdate] = agent;
+    }
+    this.storeUsersData(value);
+  }
+
+  private storeUsersData(userdata=this.usersData): void {
+    localStorage.setItem('usersData', JSON.stringify(userdata));
   }
 
   // Retrieve users data from local storage
@@ -34,6 +68,14 @@ export class AuthenticationService {
       return JSON.parse(usersDataString);
     }
     return null;
+  }
+  deleteAgent(index:number){
+    let value = this.getUsersData();
+    if (index >= 0 && index < value['agent'].length) {
+      // Use splice to remove the element at the specified index
+     value['agent'].splice(index, 1);
+    }
+    this.storeUsersData(value);
   }
 
   // Update users data and store in local storage
@@ -60,11 +102,11 @@ export class AuthenticationService {
           && user.password.toLowerCase() === password.toLowerCase());
         if (matchedUser) {
           this.isAuthenticated = true;
-          this.userRole= userCategory;
-          if(isAdmin){
+          this.userRole = userCategory;
+          if (isAdmin) {
             this.router.navigate(['/profiles/admin']);
           }
-          else{
+          else {
             this.router.navigate(['/profiles/user']);
           }
           alert("matched!");
@@ -87,13 +129,13 @@ export class AuthenticationService {
     }
   }
 
-  getUsername(): string{
+  getUsername(): string {
     return this.username;
   }
 
-getUserrole(): string{
-  return this.userRole;
-}
+  getUserrole(): string {
+    return this.userRole;
+  }
 
   isLoggedIn(): boolean {
     return this.isAuthenticated;
@@ -101,23 +143,23 @@ getUserrole(): string{
   signup(form: any): void {
     console.log('form data received', form);
     const existingUsers = this.getUsersData();
-    const userExists = existingUsers['admin'].some((user:any)=>
-    user.username.toLowerCase()===form.username.toLowerCase()) ||
-    existingUsers['agent'].some((user:any)=>
-    user.username.toLowerCase()===form.username.toLowerCase());
-    if(userExists){
+    const userExists = existingUsers['admin'].some((user: any) =>
+      user.username.toLowerCase() === form.username.toLowerCase()) ||
+      existingUsers['agent'].some((user: any) =>
+        user.username.toLowerCase() === form.username.toLowerCase());
+    if (userExists) {
       alert('User already exists');
       this.router.navigate(['/justlogin']);
     }
-    else{
+    else {
 
-    // Add the new user data to the existing data
-    existingUsers["agent"].push(form);
+      // Add the new user data to the existing data
+      existingUsers["agent"].push(form);
 
-    // Store updated users data back to local storage
-    this.updateUsersData(existingUsers);
-    console.log('Data', existingUsers);
-    this.router.navigate(['/justlogin']);
+      // Store updated users data back to local storage
+      this.updateUsersData(existingUsers);
+      console.log('Data', existingUsers);
+      this.router.navigate(['/justlogin']);
+    }
   }
-}
 }

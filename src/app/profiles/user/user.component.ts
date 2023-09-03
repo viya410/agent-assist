@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-
+import { Agent } from '../admin/agent.model';
 @Component({
   selector: 'app-user',
   templateUrl: './user.component.html',
@@ -7,4 +7,16 @@ import { Component } from '@angular/core';
 })
 export class UserComponent {
 
+public isEditing = false;
+user=new Agent();
+
+  toggleEdit(val:any) {
+
+  }
+
+  saveChanges() {
+return 
+    }
+
+  
 }

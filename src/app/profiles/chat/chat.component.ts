@@ -18,7 +18,7 @@ export class ChatComponent implements OnInit {
    }
 
   ngOnInit(): void {
-
+console.log(this.authenticationService.getUsername())
   }
 
   sendMessage(): void{

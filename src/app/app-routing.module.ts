@@ -3,8 +3,8 @@ import { RouterModule, Routes } from '@angular/router';
 import { JustloginComponent } from './justlogin/justlogin.component';
 import { LoginsignupComponent } from './loginsignup/loginsignup.component';
 import { HomepageComponent } from './homepage/homepage.component';
-import { AuthGuard } from './auth.guard';
-import { ChatComponent } from './profiles/chat/chat.component';
+import { AdminComponent } from './profiles/admin/admin.component';
+import { UserComponent } from './profiles/user/user.component';
 
 const routes: Routes = [
   {
@@ -15,9 +15,6 @@ const routes: Routes = [
   path:'justlogin',component:JustloginComponent
 },
   { path: 'profiles', loadChildren: () => import('./profiles/profiles.module').then(m => m.ProfilesModule) 
-},
-{
-  path: 'profiles/chat', component: ChatComponent, canActivate: [AuthGuard]
 }
 ];
 

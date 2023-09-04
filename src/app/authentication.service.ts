@@ -6,6 +6,7 @@ import { Agent } from './profiles/admin/agent.model';
 })
 
 export class AuthenticationService {
+ 
   private isAuthenticated: boolean = false;
   private usersData: any;
   private username: string = '';
@@ -60,6 +61,14 @@ updateAgent(agent:any):void{
   private storeUsersData(userdata=this.usersData): void {
     localStorage.setItem('usersData', JSON.stringify(userdata));
   }
+
+isAdmin():boolean{
+return this.userRole=="admin"?  true:  false;
+}
+
+isUser():boolean{
+  return this.userRole=="agent"?  true:  false;
+}
 
   // Retrieve users data from local storage
   private getUsersData(): any {

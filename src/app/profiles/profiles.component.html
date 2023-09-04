@@ -20,16 +20,16 @@
   <div class="navbar">
     <ul>
       <div class="div1">
-        <li *ngIf="isAdmin(); else user">
+        <li *ngIf="authenticationService.isAdmin()">
           <a routerLink="/profiles/admin">All Agents</a>
         </li>
-        <ng-template #user>
+        <li *ngIf="authenticationService.isUser()">
           <a routerLink="/profiles/user">Agent Profile</a>
-      </ng-template>
+        </li>
       </div>
       <div class="div2">
-        <li>
-          <a href="/profiles/chat">Chat</a>
+        <li *ngIf="authenticationService.isAdmin() || authenticationService.isUser()">
+          <a (click)="navigateToChat()">Chat</a>
         </li>
       </div>
     </ul>

@@ -8,12 +8,16 @@ body{
 }
 
 header{
-  background-color: #333;
+  background-color: burlywood;
   color: #fff;
   padding: 10px;
   display: flex;
   justify-content: space-between;
   align-items: center;
+}
+
+h2{
+  font-family: Georgia, 'Times New Roman', Times, serif;
 }
 
 .container{

@@ -12,7 +12,8 @@ import { AuthenticationService } from "src/app/authentication.service";
     canActivate(): boolean {
       if (this.authService.isAdmin()) {
         return true; // Allow navigation to the admin route
-      } else {
+      } 
+      else {
         this.router.navigate(['/user']); // Redirect to the user route if not admin
         return false;
       }

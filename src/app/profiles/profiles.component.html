@@ -9,7 +9,7 @@
       <button (click)="toggleDropdown()">@{{authenticationService.getUsername()}}
         ({{authenticationService.getUserrole()}})</button>
       <div *ngIf="isClicked" class="dropdown-content">
-        <p>Username</p>
+        <p>{{authenticationService.getUsername()}}</p>
         <a id="logout" href="./justlogin">Logout</a>
       </div>
     </ng-container>

@@ -1,46 +1,76 @@
-<nav class="navbar bg-body-tertiary" id="navigation">
-  <div class="container-fluid navbar-container">
-    <a id="heading" href="">
-      <h2>AGENT ASSIST PORTAL DEMO</h2>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <div class="container">
+    <a class="navbar-brand" href="">
+      <h2>AGENT ASSIST PORTAL</h2>
     </a>
-    <div class="links">
-      <ng-container *ngIf="!(this.auth.isLoggedIn())">
-        <a href="/justlogin">LOGIN</a>
-        <a href="/signup">SIGN UP</a>
-      </ng-container>
-     
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+      <ul class="navbar-nav">
+        <ng-container *ngIf="!auth.isLoggedIn(); else loggedInLinks">
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/justlogin">Login</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/signup">Sign Up</a>
+          </li>
+        </ng-container>
+        <ng-template #loggedInLinks>
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/profiles">My Profile</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" (click)="logout()">Logout</a>
+          </li>
+        </ng-template>
+      </ul>
     </div>
   </div>
 </nav>
+
 <div class="container mt-5">
-  <div class="jumbotron">
-    <h1>Welcome to Agent Assist Portal</h1>
-    <p class="lead">Transforming the way you communicate you know your customers.</p>
+  <div class="jumbotron text-center">
+    <h1 class="display-4">Welcome to Agent Assist Portal</h1>
+    <p class="lead">Transforming the way you communicate and understand your customers.</p>
+    <hr class="my-4">
+    <p>Empower your agents with the tools they need to deliver exceptional customer service.</p>
+    <a class="btn btn-primary btn-lg" href="#learn-more" role="button">Learn more</a>
   </div>
 
-  <div class="row">
+  <div id="learn-more" class="row mt-5">
     <div class="col-md-6">
       <h2>About Agent Assist Portal</h2>
-      <p>At Agent Assist, our mission is to make it easy for the agent to view, access and understand customer needs and
-        deliver consistent solutions. Our platform is designed to get all agents together.</p>
+      <p>At Agent Assist, our mission is to make it easy for agents to view, access, and understand customer needs and
+        deliver consistent solutions. Our platform is designed to bring all agents together, fostering collaboration and efficiency.</p>
     </div>
     <div class="col-md-6">
-      <h2>Why Agent Assist Portal?</h2>
-      <ul>
-        <li>Ease of Access: Agent and admin can easily access relevant records for assessing customer satisfaction.</li>
-        <li>Add & Delete records: This portal makes it easy to add new agents, or delete old records.</li>
+      <h2>Why Choose Agent Assist Portal?</h2>
+      <ul class="list-group">
+        <li class="list-group-item">
+          <i class="fas fa-check-circle text-success me-2"></i>
+          Ease of Access: Agents and admins can easily access relevant records for assessing customer satisfaction.
+        </li>
+        <li class="list-group-item">
+          <i class="fas fa-check-circle text-success me-2"></i>
+          Efficient Management: Add new agents or delete old records with just a few clicks.
+        </li>
+        <li class="list-group-item">
+          <i class="fas fa-check-circle text-success me-2"></i>
+          Real-time Collaboration: Enhance team communication and problem-solving capabilities.
+        </li>
       </ul>
     </div>
   </div>
 
-  <div class="text-center mt-4">
-    <a href="/justlogin" class="btn btn-primary btn-lg">Get Started</a>
+  <div class="text-center mt-5">
+    <a routerLink="/justlogin" class="btn btn-primary btn-lg">Get Started</a>
   </div>
 
   <div class="mt-5">
-    <blockquote class="blockquote">
-      <p class="mb-0">"We learned a lot while making this work."</p>
-      <footer class="blockquote-footer">- Vishnu Priya, Sunny & Ayesha</footer>
+    <blockquote class="blockquote text-center">
+      <p class="mb-0">"We learned a lot while making this work, and we're excited to share it with you."</p>
+      <footer class="blockquote-footer">Vishnu Priya, Sunny & Ayesha</footer>
     </blockquote>
   </div>
 </div>

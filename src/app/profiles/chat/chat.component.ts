@@ -1,6 +1,7 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { AuthenticationService } from 'src/app/authentication.service';
-import { ChatService } from 'src/app/chat.service';
+import { AuthenticationService } from 'src/app/authentication/authentication.service';
+import { ChatService } from 'src/app/core/chat.service';
+
 
 @Component({
   selector: 'app-chat',

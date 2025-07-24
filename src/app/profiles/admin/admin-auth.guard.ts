@@ -1,7 +1,6 @@
 import { Injectable } from "@angular/core";
 import { CanActivate, Router } from "@angular/router";
-import { AuthenticationService } from "src/app/authentication.service";
-
+import { AuthenticationService } from "../../authentication/authentication.service";
 // admin-auth.guard.ts
 @Injectable({
     providedIn: 'root',

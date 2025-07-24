@@ -1,6 +1,6 @@
 import { Component,AfterViewInit } from '@angular/core';
 import { Agent } from './agent.model';
-import { AuthenticationService } from 'src/app/authentication.service';
+import { AuthenticationService } from './../../authentication/authentication.service';
 
 @Component({
   selector: 'app-admin',

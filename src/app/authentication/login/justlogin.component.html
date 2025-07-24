@@ -1,0 +1,35 @@
+<section class="login-container">
+  <div class="card shadow-lg">
+    <div class="card-body p-4">
+      <h2 class="text-center ">Login</h2>
+      <form #formRef="ngForm" (ngSubmit)="submitForm(formRef)">
+        <div class="mb-3">
+          <label for="username" class="form-label">Username</label>
+          <input type="text" class="form-control" id="username" name="username" ngModel required placeholder="Enter your username">
+        </div>
+
+        <div class="mb-3">
+          <label for="password" class="form-label">Password</label>
+          <input type="password" class="form-control" id="password" name="password" ngModel required placeholder="Enter your password">
+        </div>
+
+        <div class="mb-3 form-check">
+          <input type="checkbox" class="form-check-input" id="rememberMe" name="rememberMe" ngModel>
+          <label class="form-check-label" for="rememberMe">Remember me</label>
+        </div>
+
+        <div class="d-grid gap-2 mb-3">
+          <button type="submit" class="btn btn-primary btn-lg">Login</button>
+        </div>
+
+        <div class="text-center">
+          <p class="mb-2">Or login with:</p>
+          <div class="mb-3">
+            <asl-google-signin-button type='standard' size='medium'></asl-google-signin-button>
+          </div>
+          <a routerLink="/signup" class="text-decoration-none">New user? Sign Up!</a>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>

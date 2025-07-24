@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { Agent } from './profiles/admin/agent.model';
+import { SocialUser } from '@abacritt/angularx-social-login';
+
 @Injectable({
   providedIn: 'root'
 })
-
 export class AuthenticationService {
  
   private isAuthenticated: boolean = false;
@@ -15,8 +15,9 @@ export class AuthenticationService {
  
   constructor(private router: Router) {
     this.usersData = this.getUsersData() || {
-      "admin": [{ email: "example@gmail.com", phone: 1234567890, firstName: 'Jitendra', lastName: 'Thakur', username: 'jitendra789', password: 'jitendra789' },
-      { email: "example@gmail.com", phone: 1234567890, firstName: 'Jay', lastName: 'Sana', username: 'jay234', password: 'jay234' }
+      "admin": [
+        { email: "example@gmail.com", phone: 1234567890, firstName: 'Jitendra', lastName: 'Thakur', username: 'jitendra789', password: 'jitendra789' },
+        { email: "example@gmail.com", phone: 1234567890, firstName: 'Jay', lastName: 'Sana', username: 'jay234', password: 'jay234' }
       ],
       "agent": [
         { email: "example@gmail.com", phone: 1234567890, firstName: 'Sarah', lastName: 'Miller', username: 'sarah890', password: 'sarah890' },
@@ -58,16 +59,16 @@ updateAgent(agent:any):void{
     this.storeUsersData(value);
   }
 
-  private storeUsersData(userdata=this.usersData): void {
-    localStorage.setItem('usersData', JSON.stringify(userdata));
+  private storeUsersData(data?: any): void {
+    localStorage.setItem('usersData', JSON.stringify(data || this.usersData));
   }
 
 isAdmin():boolean{
-return this.userRole=="admin"?  true:  false;
+return this.userRole=="admin";
 }
 
 isUser():boolean{
-  return this.userRole=="agent"?  true:  false;
+  return this.userRole=="agent";
 }
 
   // Retrieve users data from local storage
@@ -93,49 +94,71 @@ isUser():boolean{
     this.storeUsersData();
   }
 
-  login(username: string, password: string): void {
-    const data = this.getUsersData();
-    console.log(data)
-    this.username = username;
+  login(username: string, password: string): Promise<void> {
+    return new Promise((resolve, reject) => {
+      const data = this.getUsersData();
+      this.username = username;
 
-    if (data) {
-      const isAdmin = !!data['admin'].find((user: any) =>
-        user.username.toLowerCase() === username.toLowerCase());
-      const isAgent = !!data['agent'].find((user: any) =>
-        user.username.toLowerCase() === username.toLowerCase());
-      if (isAdmin || isAgent) {
-        const userCategory = isAdmin ? 'admin' : 'agent';
+      if (data) {
+        const isAdmin = !!data['admin'].find((user: any) =>
+          user.username.toLowerCase() === username.toLowerCase());
+        const isAgent = !!data['agent'].find((user: any) =>
+          user.username.toLowerCase() === username.toLowerCase());
+        
+        if (isAdmin || isAgent) {
+          const userCategory = isAdmin ? 'admin' : 'agent';
+          const matchedUser = data[userCategory].find((user: any) =>
+            user.username.toLowerCase() === username.toLowerCase() && user.password === password);
+          
+          if (matchedUser) {
+            this.isAuthenticated = true;
+            this.userRole = userCategory;
+            this.router.navigate(userCategory === 'admin' ? ['/profiles/admin'] : ['/profiles/user']);
+            resolve();
+          } else {
+            reject('Invalid username or password');
+          }
+        } else {
+          reject('User does not exist');
+        }
+      } else {
+        reject('User data not found');
+      }
+    });
+  }
 
-        const matchedUser = data[userCategory].find((user: any) =>
-          user.username.toLowerCase() === username.toLowerCase()
-          && user.password.toLowerCase() === password.toLowerCase());
-        if (matchedUser) {
-          this.isAuthenticated = true;
-          this.userRole = userCategory;
-          if (isAdmin) {
-            this.router.navigate(['/profiles/admin']);
-          }
-          else {
-            this.router.navigate(['/profiles/user']);
-          }
-          alert("matched!");
-        }
-        else {
-          this.isAuthenticated = false;
-          this.router.navigate(['/justlogin']);
-          alert('wrong username or password')
-        }
+  handleGoogleLogin(user: SocialUser): Promise<void> {
+    return new Promise((resolve, reject) => {
+      const data = this.getUsersData();
+      const existingUser = data['admin'].find((u: any) => u.email === user.email);
+      
+      if (existingUser) {
+        // User already exists, just log them in
+        this.isAuthenticated = true;
+        this.username = existingUser.username;
+        this.userRole = 'admin';
+      } else {
+        // New user, add them to the admin array
+        const newUser = {
+          email: user.email,
+          firstName: user.firstName,
+          lastName: user.lastName,
+          username: user.email, // Using email as username for Google users
+          password: 'google-auth', // Set a placeholder password
+          phone: 0, // Set a default phone number
+          photoUrl: user.photoUrl
+        };
+        data['admin'].push(newUser);
+        this.storeUsersData(data);
+        
+        this.isAuthenticated = true;
+        this.username = newUser.username;
+        this.userRole = 'admin';
       }
-      else {
-        this.isAuthenticated = false;
-        this.router.navigate(['/justlogin'])
-        alert('user does not exist')
-      }
-    }
-    else {
-      this.isAuthenticated = false;
-      alert("not exist");
-    }
+      
+      this.router.navigate(['/profiles/admin']); // Navigate to admin profile
+      resolve();
+    });
   }
 
   getUsername(): string {
@@ -146,6 +169,15 @@ isUser():boolean{
     return this.userRole;
   }
 
+  getUser():any{
+    const data = this.getUsersData();
+    if (this.userRole === 'admin') {
+      return data['admin'].find((user: any) => user.username === this.username);
+    } else if (this.userRole === 'agent') {
+      return data['agent'].find((user: any) => user.username === this.username);
+    }
+    return null;
+  }
   isLoggedIn(): boolean {
     return this.isAuthenticated;
   }
@@ -170,5 +202,12 @@ isUser():boolean{
       console.log('Data', existingUsers);
       this.router.navigate(['/justlogin']);
     }
+  }
+
+  logout(): void {
+    this.isAuthenticated = false;
+    this.username = '';
+    this.userRole = '';
+    this.router.navigate(['/justlogin']);
   }
 }
